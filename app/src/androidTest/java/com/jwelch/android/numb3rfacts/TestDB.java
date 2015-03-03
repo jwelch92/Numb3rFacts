@@ -2,13 +2,9 @@ package com.jwelch.android.numb3rfacts;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
-import android.util.Log;
 
 import com.jwelch.android.numb3rfacts.data.NumbersSQLiteOpenHelper;
-import com.jwelch.android.numb3rfacts.models.MathFact;
-import com.jwelch.android.numb3rfacts.numbers_api.NumbersApiWrapper;
-
-import java.util.ArrayList;
+import com.jwelch.android.numb3rfacts.models.BaseFact;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -18,44 +14,58 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 public class TestDB extends AndroidTestCase {
 
     public void testInsert() {
-        MathFact mathFact = new MathFact(1L, "Test text", 100, true, "math");
+        BaseFact mathFact = new BaseFact(1L, "Test text", 100, true, "math");
         SQLiteDatabase db = new NumbersSQLiteOpenHelper(mContext).getWritableDatabase();
         assertNotNull(db);
         long id = cupboard().withDatabase(db).put(mathFact);
         assertEquals(1L, id);
 
-        MathFact newMathFact = cupboard().withDatabase(db).get(MathFact.class, 1L);
+        BaseFact newMathFact = cupboard().withDatabase(db).get(BaseFact.class, 1L);
         assertNotNull(newMathFact);
         assertEquals(1L, newMathFact._id);
         assertEquals(100, newMathFact.number);
     }
 
     public void testBulkInsert() {
-        ArrayList<MathFact> mathFactList = new ArrayList<>();
+//        ArrayList<MathFact> mathFactList = new ArrayList<>();
         int start;
         int end = 10;
-        for (start = 0; start < end; start++) {
-            mathFactList.add(start, NumbersApiWrapper.getMathFact(start));
-        }
+//        for (start = 0; start < end; start++) {
+//            mathFactList.add(start, NumbersApiWrapper.getMathFact(start));
+//        }
 
-        for (MathFact fact : mathFactList) {
-            Log.v("testBulkInsert", fact.text);
+//        for (MathFact fact : mathFactList) {
+//            Log.v("testBulkInsert", fact.text);
         }
-    }
+//    }
 
-    public <E> void insertGeneric(E fact) {
+
+    public void testDateFactInsert() {
+        BaseFact df = new BaseFact(5L, "Test date", 1975, 2, true, "date");
         SQLiteDatabase db = new NumbersSQLiteOpenHelper(mContext).getWritableDatabase();
-        long id = cupboard().withDatabase(db).put(fact);
-        Log.v("insertGeneric", String.valueOf(id));
 
-        MathFact mf = cupboard().withDatabase(db).get(MathFact.class, id);
-        Log.v("insertGeneric", mf.text + mf.type + String.valueOf(mf.number));
+        long _id = cupboard().withDatabase(db).put(df);
+        assertEquals(5L, _id);
+
+        BaseFact bf = cupboard().withDatabase(db).get(BaseFact.class, _id);
+        assertEquals(2, bf.number);
+        assertEquals("date", bf.type);
+        assertEquals(1975, bf.year);
+    }
+
+    public void testYearFactInsert() {
+        BaseFact df = new BaseFact(10L, "Test year fact", "April 20", 1992, true, "year");
+        SQLiteDatabase db = new NumbersSQLiteOpenHelper(mContext).getWritableDatabase();
+
+        long _id = cupboard().withDatabase(db).put(df);
+        assertEquals(10L, _id);
+
+        BaseFact bf = cupboard().withDatabase(db).get(BaseFact.class, _id);
+        assertEquals(1992, bf.number);
+        assertEquals("year", bf.type);
+        assertEquals("April 20", bf.date);
 
     }
 
-    public void testInsertGeneric() {
-        int number = 5;
-        insertGeneric(NumbersApiWrapper.getMathFact(number));
 
-    }
 }

@@ -1,13 +1,13 @@
 package com.jwelch.android.numb3rfacts.data;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.jwelch.android.numb3rfacts.models.DateFact;
-import com.jwelch.android.numb3rfacts.models.MathFact;
-import com.jwelch.android.numb3rfacts.models.TriviaFact;
-import com.jwelch.android.numb3rfacts.models.YearFact;
+import com.jwelch.android.numb3rfacts.models.BaseFact;
+
+import java.util.ArrayList;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -27,20 +27,29 @@ public class DataManager {
     private Context mContext;
     private SQLiteDatabase mDatabase = new NumbersSQLiteOpenHelper(mContext).getWritableDatabase();
 
-
-    public DateFact getDateFact(long id) {
-        return cupboard().withDatabase(mDatabase).get(DateFact.class, id);
+    public BaseFact getFactById(long id) {
+        return cupboard().withDatabase(mDatabase).get(BaseFact.class, id);
     }
 
-    public MathFact getMathFact(long id) {
-        return cupboard().withDatabase(mDatabase).get(MathFact.class, id);
+    public BaseFact getFactByNumber(int number) {
+        return cupboard().withDatabase(mDatabase).query(BaseFact.class).withSelection("number = ?", String.valueOf(number)).get();
+
     }
 
-    public TriviaFact getTriviaFact(long id) {
-        return cupboard().withDatabase(mDatabase).get(TriviaFact.class, id);
+    public void deleteFactById(long id) {
+        cupboard().withDatabase(mDatabase).delete(BaseFact.class, id);
     }
 
-    public YearFact getYearFact(long id) {
-        return cupboard().withDatabase(mDatabase).get(YearFact.class, id);
+    public long insertFact(BaseFact fact) {
+        return cupboard().withDatabase(mDatabase).put(fact);
+    }
+
+    public void bulkInsert(ArrayList<BaseFact> baseFacts) {
+        for (BaseFact fact : baseFacts) {
+            cupboard().withDatabase(mDatabase).put(fact);
+        }
+    }
+
+    public void updateById(long id) {
     }
 }

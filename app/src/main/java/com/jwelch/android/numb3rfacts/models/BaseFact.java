@@ -5,11 +5,14 @@ package com.jwelch.android.numb3rfacts.models;
  */
 public class BaseFact {
 
+
     public long _id;
 
     public String text;
 
     public int year;
+
+    public String date;
 
     public int number;
 
@@ -17,6 +20,11 @@ public class BaseFact {
 
     public String type;
 
+    // default empty
+    public BaseFact() {
+    }
+
+    // for trivia and math fact
     public BaseFact(long _id, String text, int number, boolean found, String type) {
         this._id = _id;
         this.text = text;
@@ -25,6 +33,23 @@ public class BaseFact {
         this.type = type;
     }
 
-    public BaseFact() {
+    // for date
+    public BaseFact(long _id, String text, int year, int number, boolean found, String type) {
+        this._id = _id;
+        this.text = text;
+        this.year = year;
+        this.number = number;
+        this.found = found;
+        this.type = type;
+    }
+
+    // for year
+    public BaseFact(long _id, String text, String date, int number, boolean found, String type) {
+        this._id = _id;
+        this.text = text;
+        this.date = date;
+        this.number = number;
+        this.found = found;
+        this.type = type;
     }
 }

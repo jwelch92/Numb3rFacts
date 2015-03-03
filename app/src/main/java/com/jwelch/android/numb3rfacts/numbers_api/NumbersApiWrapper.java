@@ -1,9 +1,6 @@
 package com.jwelch.android.numb3rfacts.numbers_api;
 
-import com.jwelch.android.numb3rfacts.models.DateFact;
-import com.jwelch.android.numb3rfacts.models.MathFact;
-import com.jwelch.android.numb3rfacts.models.TriviaFact;
-import com.jwelch.android.numb3rfacts.models.YearFact;
+import com.jwelch.android.numb3rfacts.models.BaseFact;
 
 import retrofit.RestAdapter;
 
@@ -20,19 +17,19 @@ public class NumbersApiWrapper {
     private static RestAdapter mRestAdapter = new RestAdapter.Builder().setEndpoint(NUMBERS_ENDPOINT).build();
     private static NumbersApi mNumApi = mRestAdapter.create(NumbersApi.class);
 
-    public static DateFact fetchDateFact(int day, int month) {
+    public static BaseFact fetchDateFact(int day, int month) {
         return mNumApi.getDateFact(day, month);
     }
 
-    public static MathFact fetchMathFact(int number) {
+    public static BaseFact fetchMathFact(int number) {
         return mNumApi.getMathFact(number);
     }
 
-    public static TriviaFact getTriviaFact(int number) {
+    public static BaseFact getTriviaFact(int number) {
         return mNumApi.getTriviaFact(number);
     }
 
-    public static YearFact getYearFact(int year) {
+    public static BaseFact getYearFact(int year) {
         return mNumApi.getYearFact(year);
     }
 }

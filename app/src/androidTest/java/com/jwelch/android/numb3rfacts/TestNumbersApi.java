@@ -3,10 +3,7 @@ package com.jwelch.android.numb3rfacts;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-import com.jwelch.android.numb3rfacts.models.DateFact;
-import com.jwelch.android.numb3rfacts.models.MathFact;
-import com.jwelch.android.numb3rfacts.models.TriviaFact;
-import com.jwelch.android.numb3rfacts.models.YearFact;
+import com.jwelch.android.numb3rfacts.models.BaseFact;
 import com.jwelch.android.numb3rfacts.numbers_api.NumbersApi;
 import com.jwelch.android.numb3rfacts.numbers_api.NumbersApiWrapper;
 
@@ -25,11 +22,12 @@ public class TestNumbersApi extends AndroidTestCase {
 
         NumbersApi service = restAdapter.create(NumbersApi.class);
 
-        DateFact dateFact = service.getDateFact(6, 21);
+        BaseFact dateFact = service.getDateFact(6, 21);
         assertNotNull(dateFact);
 
         logger(dateFact.text);
         logger(dateFact.type);
+        assertEquals("date", dateFact.type);
         assertEquals("date", dateFact.type);
     }
 
@@ -40,28 +38,30 @@ public class TestNumbersApi extends AndroidTestCase {
                 .setEndpoint(NUMBERS_ENDPOINT).build();
 
         NumbersApi service = restAdapter.create(NumbersApi.class);
-        MathFact mathFact = service.getMathFact(test);
+        BaseFact mathFact = service.getMathFact(test);
         assertNotNull(mathFact);
 
         logger(mathFact.text);
         logger(mathFact.type);
+        assertEquals("math", mathFact.type);
         logger(String.valueOf(mathFact.number));
 
         assertEquals(test, mathFact.number);
     }
-
-
+//
+//
     public void testGetTriviaFact() {
         int test = 100;
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(NUMBERS_ENDPOINT).build();
 
         NumbersApi service = restAdapter.create(NumbersApi.class);
-        TriviaFact triviaFact = service.getTriviaFact(test);
+        BaseFact triviaFact = service.getTriviaFact(test);
         assertNotNull(triviaFact);
 
         logger(triviaFact.text);
         logger(triviaFact.type);
+        assertEquals("trivia", triviaFact.type);
         logger(String.valueOf(triviaFact.number));
         assertEquals(test, triviaFact.number);
     }
@@ -73,11 +73,12 @@ public class TestNumbersApi extends AndroidTestCase {
                 .setEndpoint(NUMBERS_ENDPOINT).build();
 
         NumbersApi service = restAdapter.create(NumbersApi.class);
-        YearFact yearFact = service.getYearFact(year);
+        BaseFact yearFact = service.getYearFact(year);
         assertNotNull(yearFact);
 
         logger(yearFact.text);
         logger(yearFact.type);
+        assertEquals("year", yearFact.type);
         logger(String.valueOf(yearFact.number));
         assertEquals(year, yearFact.number);
     }
@@ -89,7 +90,7 @@ public class TestNumbersApi extends AndroidTestCase {
 
 
     public void testWrapper() {
-        DateFact dateFact = NumbersApiWrapper.fetchDateFact(2, 2);
+        BaseFact dateFact = NumbersApiWrapper.fetchDateFact(2, 2);
         assertNotNull(dateFact);
         logger(dateFact.text);
         assertEquals("date", dateFact.type);

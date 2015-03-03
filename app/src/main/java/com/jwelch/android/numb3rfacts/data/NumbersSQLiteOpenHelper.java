@@ -4,10 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.jwelch.android.numb3rfacts.models.DateFact;
-import com.jwelch.android.numb3rfacts.models.MathFact;
-import com.jwelch.android.numb3rfacts.models.TriviaFact;
-import com.jwelch.android.numb3rfacts.models.YearFact;
+import com.jwelch.android.numb3rfacts.models.BaseFact;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -19,10 +16,8 @@ public class NumbersSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     static {
-        cupboard().register(DateFact.class);
-        cupboard().register(MathFact.class);
-        cupboard().register(TriviaFact.class);
-        cupboard().register(YearFact.class);
+        cupboard().register(BaseFact.class);
+
     }
 
 
