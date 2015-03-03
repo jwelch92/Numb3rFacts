@@ -1,0 +1,38 @@
+package com.jwelch.android.numb3rfacts.numbers_api;
+
+import com.jwelch.android.numb3rfacts.models.DateFact;
+import com.jwelch.android.numb3rfacts.models.MathFact;
+import com.jwelch.android.numb3rfacts.models.TriviaFact;
+import com.jwelch.android.numb3rfacts.models.YearFact;
+
+import retrofit.RestAdapter;
+
+/**
+ * Created by jwelch on 3/2/15.
+ */
+public class NumbersApiWrapper {
+    private static final String LOG_TAG = NumbersApiWrapper.class.getSimpleName();
+    public static final String NUMBERS_ENDPOINT = "https://numbersapi.p.mashape.com";
+
+    private NumbersApiWrapper() {
+    }
+
+    private static RestAdapter mRestAdapter = new RestAdapter.Builder().setEndpoint(NUMBERS_ENDPOINT).build();
+    private static NumbersApi mNumApi = mRestAdapter.create(NumbersApi.class);
+
+    public static DateFact fetchDateFact(int day, int month) {
+        return mNumApi.getDateFact(day, month);
+    }
+
+    public static MathFact fetchMathFact(int number) {
+        return mNumApi.getMathFact(number);
+    }
+
+    public static TriviaFact getTriviaFact(int number) {
+        return mNumApi.getTriviaFact(number);
+    }
+
+    public static YearFact getYearFact(int year) {
+        return mNumApi.getYearFact(year);
+    }
+}
