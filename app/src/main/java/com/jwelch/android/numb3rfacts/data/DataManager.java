@@ -8,6 +8,9 @@ import android.util.Log;
 import com.jwelch.android.numb3rfacts.models.BaseFact;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import nl.qbusict.cupboard.QueryResultIterable;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -17,15 +20,15 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 public class DataManager {
     private static final String LOG_TAG = DataManager.class.getSimpleName();
 
-    public DataManager(Context mContext) {
-        this.mContext = mContext;
+    public DataManager(Context context) {
+        mDatabase = new NumbersSQLiteOpenHelper(context).getWritableDatabase();
     }
 
     private void logger(String message) {
         Log.v(LOG_TAG, message);
     }
-    private Context mContext;
-    private SQLiteDatabase mDatabase = new NumbersSQLiteOpenHelper(mContext).getWritableDatabase();
+//    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     public BaseFact getFactById(long id) {
         return cupboard().withDatabase(mDatabase).get(BaseFact.class, id);
@@ -33,6 +36,12 @@ public class DataManager {
 
     public BaseFact getFactByNumber(int number) {
         return cupboard().withDatabase(mDatabase).query(BaseFact.class).withSelection("number = ?", String.valueOf(number)).get();
+
+    }
+
+    public ArrayList<BaseFact> getFactsByType(String type) {
+        List<BaseFact> list =  cupboard().withDatabase(mDatabase).query(BaseFact.class).withSelection("type = ?", type).list();
+        return new ArrayList<>(list);
 
     }
 
@@ -51,5 +60,9 @@ public class DataManager {
     }
 
     public void updateById(long id) {
+    }
+
+    public void deleteAllTables() {
+        cupboard().withDatabase(mDatabase).dropAllTables();
     }
 }

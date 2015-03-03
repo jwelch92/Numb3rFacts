@@ -12,12 +12,11 @@ import static nl.qbusict.cupboard.CupboardFactory.cupboard;
  * Created by jwelch on 3/2/15.
  */
 public class NumbersSQLiteOpenHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "numberfacts.db";
+    public static final String DATABASE_NAME = "numberfacts.db";
     private static final int DATABASE_VERSION = 1;
 
     static {
         cupboard().register(BaseFact.class);
-
     }
 
 

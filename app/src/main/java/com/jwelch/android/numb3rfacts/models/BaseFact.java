@@ -52,4 +52,12 @@ public class BaseFact {
         this.found = found;
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        String dash = " - ";
+        return String.valueOf(this._id) + dash + this.text + dash
+                + String.valueOf(this.number) + dash + this.type;
+
+    }
 }
