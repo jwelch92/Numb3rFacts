@@ -43,18 +43,18 @@ public class TestDataManager extends AndroidTestCase{
 
     }
 
-    public void testGetFactsByType() {
-        ArrayList<BaseFact> facts = NumbersApiWrapper.fetchManyMathFacts(0, 10);
-        Log.v("testGetFacts", String.valueOf(facts.size()));
-        assertNotNull(facts);
-        DataManager dataManager = getDataManager();
-        dataManager.bulkInsert(facts);
+//    public void testGetFactsByType() {
+//        ArrayList<BaseFact> facts = NumbersApiWrapper.fetchManyMathFacts(0, 10);
+//        Log.v("testGetFacts", String.valueOf(facts.size()));
+//        assertNotNull(facts);
+//        DataManager dataManager = getDataManager();
+//        dataManager.bulkInsert(facts);
+//
+//        ArrayList<BaseFact> testFacts = dataManager.getFactsByType("math");
+//        for (BaseFact b : testFacts) {
+//            Log.v("testGetFactsByType", b.toString());
+//            assertEquals(StubData.mathfact.type, b.type);
+//        }
 
-        ArrayList<BaseFact> testFacts = dataManager.getFactsByType("math");
-        for (BaseFact b : testFacts) {
-            Log.v("testGetFactsByType", b.toString());
-            assertEquals(StubData.mathfact.type, b.type);
-        }
-
-    }
+//    }
 }
