@@ -19,13 +19,13 @@ public class NumbersDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_FACT_TABLE = "CREATE TABLE " + FactEntry.TABLE_NAME + " (" +
-                FactEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
+                FactEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 FactEntry.COLUMN_TEXT + " TEXT NOT NULL, " +
                 FactEntry.COLUMN_YEAR+ " INTEGER, " +
                 FactEntry.COLUMN_DATE + " TEXT, " +
                 FactEntry.COLUMN_NUMBER + " INTEGER NOT NULL," +
                 FactEntry.COLUMN_FOUND + " TEXT NOT NULL, " +
-                FactEntry.COLUMN_TYPE + " TEXT NOT NULL, " +
+                FactEntry.COLUMN_TYPE + " TEXT NOT NULL " +
                 ");";
 
         db.execSQL(SQL_CREATE_FACT_TABLE);

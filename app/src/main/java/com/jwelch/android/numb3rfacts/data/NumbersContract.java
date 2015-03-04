@@ -24,7 +24,7 @@ public class NumbersContract {
     public static final String PATH_FACT = "fact";
 
     public static final class FactEntry implements BaseColumns {
-        public static final String TABLE_NAME = "facts";
+        public static final String TABLE_NAME = "fact";
         public static final String COLUMN_TEXT = "text";
         public static final String COLUMN_YEAR = "year";
         public static final String COLUMN_DATE = "date";
@@ -43,6 +43,8 @@ public class NumbersContract {
         public static Uri buildFactUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
+
+
 
     }
 }
