@@ -1,16 +1,10 @@
 package com.jwelch.android.numb3rfacts.data;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.jwelch.android.numb3rfacts.models.BaseFact;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import nl.qbusict.cupboard.QueryResultIterable;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
@@ -21,7 +15,7 @@ public class DataManager {
     private static final String LOG_TAG = DataManager.class.getSimpleName();
 
     public DataManager(Context context) {
-        mDatabase = new NumbersSQLiteOpenHelper(context).getWritableDatabase();
+        mDatabase = new NumbersDBHelper(context).getWritableDatabase();
     }
 
     private void logger(String message) {
