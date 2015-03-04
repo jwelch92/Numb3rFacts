@@ -39,11 +39,18 @@ public class DataManager {
 
     }
 
-//    public ArrayList<BaseFact> getFactsByType(String type) {
-//        List<BaseFact> list =  cupboard().withDatabase(mDatabase).query(BaseFact.class).withSelection("type = ?", type).list();
-//        return new ArrayList<>(list);
-//
-//    }
+    public ArrayList<BaseFact> getFactsByType(String type) {
+        ArrayList<BaseFact> ret = new ArrayList<>();
+        QueryResultIterable<BaseFact> itr = cupboard().withDatabase(mDatabase).query(BaseFact.class).query();
+        for ( BaseFact fact : itr) {
+            Log.v(LOG_TAG, fact.toString());
+            if (fact.type.equals(type)) {
+                Log.v(LOG_TAG, "Fact was of type: " + type);
+                ret.add(fact);
+            }
+        }
+        return ret;
+    }
 
     public void deleteFactById(long id) {
         cupboard().withDatabase(mDatabase).delete(BaseFact.class, id);
@@ -53,11 +60,11 @@ public class DataManager {
         return cupboard().withDatabase(mDatabase).put(fact);
     }
 
-//    public void bulkInsert(ArrayList<BaseFact> baseFacts) {
-//        for (BaseFact fact : baseFacts) {
-//            cupboard().withDatabase(mDatabase).put(fact);
-//        }
-//    }
+    public void bulkInsert(ArrayList<BaseFact> baseFacts) {
+        for (BaseFact fact : baseFacts) {
+            cupboard().withDatabase(mDatabase).put(fact);
+        }
+    }
 
     public void updateById(long id) {
     }
