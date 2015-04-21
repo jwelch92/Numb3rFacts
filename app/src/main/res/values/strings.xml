@@ -2,4 +2,6 @@
     <string name="app_name">Numb3rFacts</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="fetch_fact_button_text">Get Number Fact!</string>
+    <string name="number_hint">42</string>
 </resources>
