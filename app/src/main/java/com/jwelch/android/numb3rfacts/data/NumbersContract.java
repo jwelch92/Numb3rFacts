@@ -44,7 +44,21 @@ public class NumbersContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
+        public static Uri buildFactUriWithType(String type) {
+            return CONTENT_URI.buildUpon().appendPath(type).build();
+        }
 
+        public static Uri buildFactUriWithTypeAndNumber(String type, int number) {
+            return CONTENT_URI.buildUpon().appendPath(type).appendQueryParameter(COLUMN_NUMBER, String.valueOf(number)).build();
+        }
+
+        public static String getTypeFromUri(Uri uri) {
+            return uri.getPathSegments().get(1);
+        }
+
+        public static int getNumberFromUri(Uri uri) {
+            return Integer.valueOf(uri.getQueryParameter(COLUMN_NUMBER));
+        }
 
     }
 }

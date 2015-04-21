@@ -26,8 +26,21 @@ public class TestProvider extends AndroidTestCase {
             assertEquals(10, cursor.getInt(col));
             Log.v("Cursor", DatabaseUtils.dumpCursorToString(cursor));
         }
-
         long id = 2;
+    }
+
+    public void testTypeQuery() {
+        ContentValues contentValues = TestUtils.createMathFact();
+        Uri r = mContext.getContentResolver().insert(NumbersContract.FactEntry.CONTENT_URI, contentValues);
+
+        Uri getTypeUri = NumbersContract.FactEntry.buildFactUriWithType("math");
+        Cursor cursor = mContext.getContentResolver().query(getTypeUri, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int col = cursor.getColumnIndex(NumbersContract.FactEntry.COLUMN_TYPE);
+            assertEquals("math", cursor.getString(col));
+            Log.v("Cursor", DatabaseUtils.dumpCursorToString(cursor));
+
+        }
 
     }
 }
