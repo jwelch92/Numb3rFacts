@@ -16,27 +16,27 @@ public interface NumbersApi {
             "X-Mashape-Key: g3DN69akvYmshsxtUfXhPG6FrkdLp1M7HrIjsnKtQmswE7JhyX"
     })
     @GET("/{day}/{month}/date?json=true")
-    BaseFact getDateFact(@Path("day") int day, @Path("month") int month);
+    BaseFact getDateFact(@Path("day") String day, @Path("month") String month);
 
     @Headers({
             "accept: text/plain",
             "X-Mashape-Key: g3DN69akvYmshsxtUfXhPG6FrkdLp1M7HrIjsnKtQmswE7JhyX"
     })
     @GET("/{number}/math?json=true")
-    BaseFact getMathFact(@Path("number") int number);
+    BaseFact getMathFact(@Path("number") String number);
 
     @Headers({
             "accept: text/plain",
             "X-Mashape-Key: g3DN69akvYmshsxtUfXhPG6FrkdLp1M7HrIjsnKtQmswE7JhyX"
     })
     @GET("/{number}/trivia?json=true&notfound=default")
-    BaseFact getTriviaFact(@Path("number") int number);
+    BaseFact getTriviaFact(@Path("number") String number);
 
     @Headers({
             "accept: text/plain",
             "X-Mashape-Key: g3DN69akvYmshsxtUfXhPG6FrkdLp1M7HrIjsnKtQmswE7JhyX"
     })
     @GET("/{year}/year?json=true")
-    BaseFact getYearFact(@Path("year") int year);
+    BaseFact getYearFact(@Path("year") String year);
 
 }

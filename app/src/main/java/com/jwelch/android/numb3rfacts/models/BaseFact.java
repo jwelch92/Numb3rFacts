@@ -7,11 +7,11 @@ public class BaseFact {
 
     public String text;
 
-    public int year;
+    public String year;
 
     public String date;
 
-    public int number;
+    public String number;
 
     public boolean found;
 
