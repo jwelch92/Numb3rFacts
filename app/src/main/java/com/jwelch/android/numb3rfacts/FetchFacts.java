@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.jwelch.android.numb3rfacts.models.BaseFact;
+import com.jwelch.android.numb3rfacts.models.FactArgs;
 import com.jwelch.android.numb3rfacts.numbers_api.NumbersApiWrapper;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 /**
  * Created by jwelch on 6/30/15.
  */
-public class FetchFacts extends AsyncTask<HashMap<String, ArrayList<String>>, Void, BaseFact> {
+public class FetchFacts extends AsyncTask<FactArgs, Void, BaseFact> {
 
     private Context mContext;
     private FetchFactsListener<BaseFact> mListener;
@@ -24,18 +25,14 @@ public class FetchFacts extends AsyncTask<HashMap<String, ArrayList<String>>, Vo
     }
 
     @Override
-    protected BaseFact doInBackground(HashMap<String, ArrayList<String>>... params) {
+    protected BaseFact doInBackground(FactArgs... params) {
         BaseFact fact = null;
-//        logger(mathFact.toString());
-        HashMap<String, ArrayList<String>> args = params[0];
-        ArrayList<String> numArgs = args.get("number");
-        ArrayList<String> type = args.get("type");
-        Log.d("FetchFacts", type.toString());
-        Log.d("FetchFacts", type.get(0));
+        FactArgs args = params[0];
+        String type = args.getType();
         if (type.equals("math")) {
-            fact = NumbersApiWrapper.fetchMathFact(numArgs.get(0));
+            fact = NumbersApiWrapper.fetchMathFact(args.getNumber());
         } else if (type.equals("date")) {
-            fact = NumbersApiWrapper.fetchDateFact(numArgs.get(0), numArgs.get(1));
+            fact = NumbersApiWrapper.fetchDateFact(args.getDates()[0], args.getDates()[1]);
         }
 
         return fact;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jwelch.android.numb3rfacts.models.BaseFact;
+import com.jwelch.android.numb3rfacts.models.FactArgs;
 import com.jwelch.android.numb3rfacts.numbers_api.NumbersApiWrapper;
 
 import java.util.ArrayList;
@@ -64,7 +65,9 @@ public class MathFragment extends Fragment {
         logger(factEdit.getText().toString());
         FetchFacts task = new FetchFacts(getActivity(), new FetchMathFactListener());
         String text = factEdit.getText().toString();
-        HashMap<String, ArrayList<String>> args = createArgs(text);
+
+        FactArgs args = new FactArgs("math", text);
+
         if (!text.equals("")) {
             task.execute(args);
         } else {
@@ -73,16 +76,6 @@ public class MathFragment extends Fragment {
 
     }
 
-    private HashMap<String, ArrayList<String>> createArgs(String number) {
-        HashMap<String, ArrayList<String>> args = new HashMap<>();
-        ArrayList<String> typeList = new ArrayList<>();
-        ArrayList<String> numList = new ArrayList<>();
-        numList.add(number);
-        typeList.add("math");
-        args.put("type", typeList);
-        args.put("number", numList);
-        return args;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
