@@ -1,6 +1,5 @@
 package com.jwelch.android.numb3rfacts;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,21 +12,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jwelch.android.numb3rfacts.models.BaseFact;
-import com.jwelch.android.numb3rfacts.numbers_api.NumbersApiWrapper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 /**
  * Created by jwelch on 6/30/15.
  */
+public class DateFragment extends Fragment {
 
-
-public class MathFragment extends Fragment {
-
-    private final String LOG_TAG = MathFragment.class.getSimpleName();
+    private final String LOG_TAG = DateFragment.class.getSimpleName();
 
     @Bind(R.id.fact_textview)
     TextView factText;
@@ -42,10 +37,10 @@ public class MathFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
 
-    public static MathFragment newInstance() {
+    public static DateFragment newInstance() {
 //        Bundle args = new Bundle();
 //        args.putInt(ARG_PAGE, page);
-        MathFragment fragment = new MathFragment();
+        DateFragment fragment = new DateFragment();
 //        fragment.setArguments(args);
         return fragment;
     }
@@ -58,10 +53,10 @@ public class MathFragment extends Fragment {
     public void fetchAFact() {
         logger("Button pressed!!!");
         logger(factEdit.getText().toString());
-        FetchFacts task = new FetchFacts(getActivity(), new FetchMathFactListener());
+        FetchFacts task = new FetchFacts(getActivity(), new FetchDateFactListener());
         String text = factEdit.getText().toString();
         if (!text.equals("")) {
-            task.execute("math", text);
+            task.execute(text);
         } else {
             Toast.makeText(getActivity(), "Please enter a number", Toast.LENGTH_SHORT).show();
         }
@@ -84,7 +79,7 @@ public class MathFragment extends Fragment {
         return rootView;
     }
 
-    public class FetchMathFactListener implements FetchFactsListener<BaseFact> {
+    public class FetchDateFactListener implements FetchFactsListener<BaseFact> {
 
         @Override
         public void onTaskComplete(BaseFact baseFact) {

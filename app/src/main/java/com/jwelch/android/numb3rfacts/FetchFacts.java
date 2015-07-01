@@ -21,11 +21,17 @@ public class FetchFacts extends AsyncTask<String, Void, BaseFact> {
 
     @Override
     protected BaseFact doInBackground(String... params) {
-        BaseFact mathFact = NumbersApiWrapper.fetchMathFact(params[0]);
+        BaseFact fact;
 //        logger(mathFact.toString());
-        if (null != mathFact.text) {
-            return mathFact;
+        String type = params[0];
+        switch (type) {
+            case "math":
+                fact = NumbersApiWrapper.fetchMathFact(params[1]);
+            case "date":
+                fact = NumbersApiWrapper.fetchDateFact(params[1], params[2]);
+
         }
+
         return null;
     }
 
