@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fact_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:text="The number 5 is the number 5"
+        android:textSize="20sp"
+        />
+
+
+    <EditText
+        android:id="@+id/fact_date_edittext_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:hint="@string/number_hint"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/fact_date_edittext_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:hint="@string/number_hint"
+        android:inputType="number"
+        />
+
+    <Button
+        android:id="@+id/fetch_fact_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/fetch_fact_button_text"/>
+
+</LinearLayout>

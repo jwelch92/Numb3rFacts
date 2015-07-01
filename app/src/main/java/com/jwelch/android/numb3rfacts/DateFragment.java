@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jwelch.android.numb3rfacts.models.BaseFact;
+import com.jwelch.android.numb3rfacts.models.FactArgs;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,13 +28,17 @@ public class DateFragment extends Fragment {
     @Bind(R.id.fact_textview)
     TextView factText;
 
-    @Bind(R.id.fact_edittext)
-    EditText factEdit;
+    @Bind(R.id.fact_date_edittext_1)
+    EditText factDateEdit1;
+
+    @Bind(R.id.fact_date_edittext_2)
+    EditText factDateEdit2;
 
     @Bind(R.id.fetch_fact_button)
     Button fetchFact;
 
     private BaseFact mCurrentFact;
+    
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
 
@@ -49,19 +54,22 @@ public class DateFragment extends Fragment {
         Log.d(LOG_TAG, msg);
     }
 
-//    @OnClick(R.id.fetch_fact_button)
-//    public void fetchAFact() {
-//        logger("Button pressed!!!");
-//        logger(factEdit.getText().toString());
-//        FetchFacts task = new FetchFacts(getActivity(), new FetchDateFactListener());
-//        String text = factEdit.getText().toString();
-//        if (!text.equals("")) {
-//            task.execute();
-//        } else {
-//            Toast.makeText(getActivity(), "Please enter a number", Toast.LENGTH_SHORT).show();
-//        }
+    @OnClick(R.id.fetch_fact_button)
+    public void fetchAFact() {
 
-//    }
+        FetchFacts task = new FetchFacts(getActivity(), new FetchDateFactListener());
+        String text1 = factDateEdit1.getText().toString();
+        String text2 = factDateEdit2.getText().toString();
+        String[] dates = new String[] {text1, text2};
+        FactArgs args = new FactArgs("math", null, dates, null);
+
+        if (!text1.equals("") && !text2.equals("")) {
+            task.execute(args);
+        } else {
+            Toast.makeText(getActivity(), "Please enter a number", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
