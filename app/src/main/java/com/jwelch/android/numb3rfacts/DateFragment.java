@@ -49,19 +49,19 @@ public class DateFragment extends Fragment {
         Log.d(LOG_TAG, msg);
     }
 
-    @OnClick(R.id.fetch_fact_button)
-    public void fetchAFact() {
-        logger("Button pressed!!!");
-        logger(factEdit.getText().toString());
-        FetchFacts task = new FetchFacts(getActivity(), new FetchDateFactListener());
-        String text = factEdit.getText().toString();
-        if (!text.equals("")) {
-            task.execute(text);
-        } else {
-            Toast.makeText(getActivity(), "Please enter a number", Toast.LENGTH_SHORT).show();
-        }
+//    @OnClick(R.id.fetch_fact_button)
+//    public void fetchAFact() {
+//        logger("Button pressed!!!");
+//        logger(factEdit.getText().toString());
+//        FetchFacts task = new FetchFacts(getActivity(), new FetchDateFactListener());
+//        String text = factEdit.getText().toString();
+//        if (!text.equals("")) {
+//            task.execute();
+//        } else {
+//            Toast.makeText(getActivity(), "Please enter a number", Toast.LENGTH_SHORT).show();
+//        }
 
-    }
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

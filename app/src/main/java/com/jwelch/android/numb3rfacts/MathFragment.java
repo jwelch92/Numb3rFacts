@@ -15,6 +15,10 @@ import android.widget.Toast;
 import com.jwelch.android.numb3rfacts.models.BaseFact;
 import com.jwelch.android.numb3rfacts.numbers_api.NumbersApiWrapper;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -60,12 +64,24 @@ public class MathFragment extends Fragment {
         logger(factEdit.getText().toString());
         FetchFacts task = new FetchFacts(getActivity(), new FetchMathFactListener());
         String text = factEdit.getText().toString();
+        HashMap<String, ArrayList<String>> args = createArgs(text);
         if (!text.equals("")) {
-            task.execute("math", text);
+            task.execute(args);
         } else {
             Toast.makeText(getActivity(), "Please enter a number", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private HashMap<String, ArrayList<String>> createArgs(String number) {
+        HashMap<String, ArrayList<String>> args = new HashMap<>();
+        ArrayList<String> typeList = new ArrayList<>();
+        ArrayList<String> numList = new ArrayList<>();
+        numList.add(number);
+        typeList.add("math");
+        args.put("type", typeList);
+        args.put("number", numList);
+        return args;
     }
 
     @Override
