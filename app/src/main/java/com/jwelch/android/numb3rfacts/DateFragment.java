@@ -38,7 +38,7 @@ public class DateFragment extends Fragment {
     Button fetchFact;
 
     private BaseFact mCurrentFact;
-    
+
     public static final String ARG_PAGE = "ARG_PAGE";
     private int mPage;
 
@@ -61,7 +61,7 @@ public class DateFragment extends Fragment {
         String text1 = factDateEdit1.getText().toString();
         String text2 = factDateEdit2.getText().toString();
         String[] dates = new String[] {text1, text2};
-        FactArgs args = new FactArgs("math", null, dates, null);
+        FactArgs args = new FactArgs("date", null, dates, null);
 
         if (!text1.equals("") && !text2.equals("")) {
             task.execute(args);
@@ -82,7 +82,7 @@ public class DateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_math, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_date, container, false);
         ButterKnife.bind(this, rootView);
         return rootView;
     }
