@@ -10,11 +10,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class NumbersFragmentPagerAdapter extends FragmentPagerAdapter {
 
     // will be 4
-    final int PAGE_COUNT = 2;
     private String[] mPageTitles = new String[] {
             "Math Facts",
             "Date Facts",
+            "Year Facts",
     };
+    final int PAGE_COUNT = mPageTitles.length;
+
 
     public NumbersFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -27,6 +29,8 @@ public class NumbersFragmentPagerAdapter extends FragmentPagerAdapter {
                 return MathFragment.newInstance();
             case 1:
                 return DateFragment.newInstance();
+            case 2:
+                return YearFragment.newInstance();
             default:
                 return MathFragment.newInstance();
         }

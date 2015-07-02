@@ -33,6 +33,8 @@ public class FetchFacts extends AsyncTask<FactArgs, Void, BaseFact> {
             fact = NumbersApiWrapper.fetchMathFact(args.getNumber());
         } else if (type.equals("date")) {
             fact = NumbersApiWrapper.fetchDateFact(args.getDates()[0], args.getDates()[1]);
+        } else if (type.equals("year")) {
+            fact = NumbersApiWrapper.fetchYearFact(args.getYear());
         }
 
         return fact;

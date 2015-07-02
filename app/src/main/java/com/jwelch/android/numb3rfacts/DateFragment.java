@@ -17,6 +17,7 @@ import com.jwelch.android.numb3rfacts.models.FactArgs;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import icepick.Icepick;
 
 /**
  * Created by jwelch on 6/30/15.
@@ -43,10 +44,7 @@ public class DateFragment extends Fragment {
     private int mPage;
 
     public static DateFragment newInstance() {
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_PAGE, page);
         DateFragment fragment = new DateFragment();
-//        fragment.setArguments(args);
         return fragment;
     }
 
@@ -74,9 +72,15 @@ public class DateFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        mPage = getArguments().getInt(ARG_PAGE);
+//        Icepick.restoreInstanceState(this, savedInstanceState);
         logger("onCreate");
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+//        Icepick.saveInstanceState(this, outState);
     }
 
     @Override
@@ -85,6 +89,12 @@ public class DateFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_date, container, false);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     public class FetchDateFactListener implements FetchFactsListener<BaseFact> {

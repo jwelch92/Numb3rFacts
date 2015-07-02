@@ -18,28 +18,29 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import icepick.Icepick;
-
+import icepick.Icicle;
 
 /**
- * Created by jwelch on 6/30/15.
+ * Created by jwelch on 7/1/15.
  */
+public class YearFragment extends Fragment {
 
+    private final String LOG_TAG = YearFragment.class.getSimpleName();
 
-public class MathFragment extends Fragment {
-
-    public static final String ARG_PAGE = "ARG_PAGE";
-    private final String LOG_TAG = MathFragment.class.getSimpleName();
-    @Bind(R.id.fact_textview)
+    @Bind(R.id.fact_year_textview)
     TextView factText;
-    @Bind(R.id.fact_edittext)
-    EditText factEdit;
-    @Bind(R.id.fetch_fact_button)
-    Button fetchFact;
-    private BaseFact mCurrentFact;
-    private int mPage;
 
-    public static MathFragment newInstance() {
-        MathFragment fragment = new MathFragment();
+    @Bind(R.id.fact_year_edittext)
+    EditText factEdit;
+
+    @Bind(R.id.fetch_fact_year_button)
+    Button fetchFact;
+
+    public BaseFact mCurrentFact;
+
+
+    public static YearFragment newInstance() {
+        YearFragment fragment = new YearFragment();
         return fragment;
     }
 
@@ -47,14 +48,14 @@ public class MathFragment extends Fragment {
         Log.d(LOG_TAG, msg);
     }
 
-    @OnClick(R.id.fetch_fact_button)
+    @OnClick(R.id.fetch_fact_year_button)
     public void fetchAFact() {
         logger("Button pressed!!!");
         logger(factEdit.getText().toString());
-        FetchFacts task = new FetchFacts(getActivity(), new FetchMathFactListener());
+        FetchFacts task = new FetchFacts(getActivity(), new FetchYearFactListener());
         String text = factEdit.getText().toString();
 
-        FactArgs args = new FactArgs("math", text);
+        FactArgs args = new FactArgs("year", null, null, text);
 
         if (!text.equals("")) {
             task.execute(args);
@@ -69,21 +70,23 @@ public class MathFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        Icepick.restoreInstanceState(this, savedInstanceState);
-        logger("onCreate");
 
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
 //        Icepick.saveInstanceState(this, outState);
-    }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_math, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_year, container, false);
         ButterKnife.bind(this, rootView);
+        if (mCurrentFact != null) {
+            factText.setText(mCurrentFact.text);
+        }
         return rootView;
     }
 
@@ -93,7 +96,7 @@ public class MathFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    public class FetchMathFactListener implements FetchFactsListener<BaseFact> {
+    public class FetchYearFactListener implements FetchFactsListener<BaseFact> {
 
         @Override
         public void onTaskComplete(BaseFact baseFact) {
@@ -102,4 +105,6 @@ public class MathFragment extends Fragment {
         }
     }
 
+
 }
+
