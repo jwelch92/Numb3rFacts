@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.jwelch.android.numb3rfacts.models.BaseFact;
 import com.jwelch.android.numb3rfacts.models.FactArgs;
+import com.jwelch.android.numb3rfacts.numbers_api.NumbersApi;
 import com.jwelch.android.numb3rfacts.numbers_api.NumbersApiWrapper;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class FetchFacts extends AsyncTask<FactArgs, Void, BaseFact> {
             fact = NumbersApiWrapper.fetchDateFact(args.getDates()[0], args.getDates()[1]);
         } else if (type.equals("year")) {
             fact = NumbersApiWrapper.fetchYearFact(args.getYear());
+        } else if (type.equals("trivia")) {
+            fact = NumbersApiWrapper.fetchTriviaFact(args.getNumber());
         }
 
         return fact;

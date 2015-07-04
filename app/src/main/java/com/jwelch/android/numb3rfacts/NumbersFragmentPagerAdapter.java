@@ -11,9 +11,10 @@ public class NumbersFragmentPagerAdapter extends FragmentPagerAdapter {
 
     // will be 4
     private String[] mPageTitles = new String[] {
-            "Math Facts",
-            "Date Facts",
-            "Year Facts",
+            "Math",
+            "Date",
+            "Year",
+            "Trivia"
     };
     final int PAGE_COUNT = mPageTitles.length;
 
@@ -31,6 +32,8 @@ public class NumbersFragmentPagerAdapter extends FragmentPagerAdapter {
                 return DateFragment.newInstance();
             case 2:
                 return YearFragment.newInstance();
+            case 3:
+                return TriviaFragment.newInstance();
             default:
                 return MathFragment.newInstance();
         }
